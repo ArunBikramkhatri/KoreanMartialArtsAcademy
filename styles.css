@@ -34,16 +34,16 @@ a:focus-visible, summary:focus-visible { outline: 3px solid #ffb6ac; outline-off
 }
 
 .brand { display: inline-flex; width: fit-content; align-items: center; gap: 12px; }
-.brand-mark {
-  width: 44px;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  background: var(--ink);
-  color: white;
-  font: 22px/1 var(--display);
-  letter-spacing: -0.04em;
-  border-bottom: 4px solid var(--red);
+.brand-logo {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 auto;
+  display: block;
+  padding: 2px;
+  border: 1px solid rgba(16, 19, 18, 0.12);
+  border-radius: 50%;
+  background: white;
+  object-fit: contain;
 }
 .brand-copy { font-size: 12px; line-height: 1.05; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; }
 .brand-copy small { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; letter-spacing: 0.18em; }
@@ -336,14 +336,16 @@ body::before {
   box-shadow: 0 14px 45px rgba(16, 19, 18, 0.09);
 }
 
-.brand-mark {
+.brand-logo {
   position: relative;
   overflow: hidden;
-  box-shadow: 4px 4px 0 rgba(201, 47, 41, 0.14);
-  transition: transform 300ms cubic-bezier(.2, .8, .2, 1), box-shadow 300ms ease;
+  box-shadow: 0 6px 18px rgba(16, 19, 18, 0.12);
+  transition: width 300ms ease, height 300ms ease, transform 300ms cubic-bezier(.2, .8, .2, 1), box-shadow 300ms ease;
 }
 
-.brand:hover .brand-mark { transform: rotate(-4deg) scale(1.04); box-shadow: 6px 6px 0 var(--red); }
+.brand:hover .brand-logo { transform: rotate(-4deg) scale(1.04); box-shadow: 0 8px 22px rgba(201, 47, 41, 0.25); }
+.site-header.is-scrolled .brand-logo { width: 50px; height: 50px; }
+footer .brand-logo { width: 54px; height: 54px; }
 .desktop-nav a.active::after { width: 100%; }
 
 .header-cta span,
@@ -622,6 +624,8 @@ body::before {
 
 @media (max-width: 760px) {
   .site-header.is-scrolled { width: calc(100% - 16px); height: 66px; padding-inline: 8px; }
+  .site-header .brand-logo { width: 50px; height: 50px; }
+  .site-header.is-scrolled .brand-logo { width: 46px; height: 46px; }
   .hero-photo { background-position: center !important; }
   .page-ready .hero-photo { animation-name: mobilePhotoReveal; }
   .class-card.featured { --card-lift: 0px; }
