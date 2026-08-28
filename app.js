@@ -10,7 +10,7 @@ function updateScrollEffects() {
 }
 window.addEventListener('scroll', updateScrollEffects, { passive: true });
 updateScrollEffects();
-const revealElements = document.querySelectorAll('.section-title, .section-intro, .program-card, .principle-intro, .principle-list article, .coach-card, .contact-copy, .contact-details > div');
+const revealElements = document.querySelectorAll('.section-title, .section-intro, .program-card, .schedule-heading, .schedule-card, .schedule-note, .principle-intro, .principle-list article, .coach-card, .contact-copy, .contact-details > div');
 revealElements.forEach((element, index) => { element.classList.add('reveal-target'); element.style.setProperty('--reveal-delay', `${(index % 3) * 80}ms`); });
 if (reduceMotion || !('IntersectionObserver' in window)) {
   revealElements.forEach((element) => element.classList.add('is-visible'));
