@@ -53,4 +53,46 @@ footer{min-height:120px;padding:0 max(24px,calc((100vw - 1320px)/2));display:gri
   .vertical-word { display: none; }
   .hero-marquee div { font-size: 9px; letter-spacing: .12em; }
   .hero-marquee i { padding-inline: 15px; }
+
+  .section { width: calc(100% - 32px); padding-block: 68px; }
+  .section-title h2, .principle-intro h2, .contact h2, .schedule-heading h2 { font-size: clamp(42px, 12.5vw, 56px); }
+  .section-intro, .schedule-heading > p { font-size: 14px; line-height: 1.65; }
+  .program-grid, .coach-grid, .schedule-grid { margin-top: 34px; gap: 12px; }
+  .program-card, .program-card:last-child { min-height: 360px; padding: 24px 20px; border-radius: 22px; }
+  .program-card h3 { font-size: 40px; }
+  .program-card div > p:last-child { max-width: 270px; font-size: 13px; }
+  .program-icon { right: 12px; top: 42px; font-size: 118px; }
+
+  .schedule { padding: 68px 16px; }
+  .schedule-card { padding: 22px 18px; border-radius: 22px; }
+  .schedule-card-top { min-height: auto; margin-bottom: 28px; gap: 12px; }
+  .schedule-card-top p { max-width: 190px; font-size: 8px; line-height: 1.5; }
+  .schedule-card h3 { font-size: 38px; }
+  .schedule-mark { width: 46px; height: 46px; font-size: 20px; }
+  .time-row { min-height: 0; padding: 20px 0; gap: 12px; }
+  .time-row span { font-size: 10px; }
+  .time-row small { font-size: 9px; }
+  .time-slots { width: 100%; gap: 6px; }
+  .time-slots time { flex: 1 1 104px; padding: 10px 7px; font-size: 12px; text-align: center; }
+  .schedule-note { margin-top: 12px; padding: 20px; border-radius: 18px; gap: 16px; }
+  .schedule-note .button { width: 100%; }
+
+  .principles { padding: 68px 16px; gap: 40px; }
+  .principle-list article { grid-template-columns: 32px 1fr; gap: 14px; padding: 24px 0; }
+  .principle-list h3 { font-size: 21px; }
+  .principle-list p { font-size: 13px; }
+  .coach-photo { min-height: 330px; }
+  .coach-photo span { left: 20px; bottom: 20px; max-width: calc(100% - 40px); }
+  .coach-copy { padding: 38px 22px; }
+  .coach-copy h3 { font-size: clamp(48px, 14vw, 64px); }
+  .coach-copy ul { margin-top: 28px; gap: 6px; }
+  .coach-copy li { padding: 7px 9px; font-size: 7px; }
+
+  .contact-copy, .contact-details { padding: 68px 16px; }
+  .contact-copy > p:not(.eyebrow) { font-size: 14px; }
+  .contact-copy .button { width: 100%; }
+  .contact-details > div { min-height: 0; padding: 22px 18px; }
+  .contact-details .contact-phone { font-size: 21px; }
+  footer { min-height: 0; padding: 28px 16px; gap: 16px; }
+  footer > p { font-size: 7px; line-height: 1.6; }
 }
