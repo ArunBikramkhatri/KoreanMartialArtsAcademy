@@ -28,3 +28,29 @@ footer{min-height:120px;padding:0 max(24px,calc((100vw - 1320px)/2));display:gri
   .mobile-menu nav a:focus-visible, .mobile-menu nav a:hover { background: rgba(255,255,255,.12); }
   .mobile-menu nav a:last-child:focus-visible, .mobile-menu nav a:last-child:hover { background: var(--gold); color: var(--ink); }
 }
+
+/* Compact phones: preserve the hero's hierarchy without crowding the artwork. */
+@media (max-width: 480px) {
+  .hero-copy { padding: 48px 16px 40px; }
+  .eyebrow { margin-bottom: 18px; font-size: 9px; letter-spacing: .17em; }
+  .eyebrow::before { width: 24px; }
+  h1 { font-size: clamp(46px, 13.5vw, 62px); letter-spacing: -.065em; }
+  .hero-lead { margin: 24px 0; font-size: 15px; line-height: 1.65; }
+  .hero-actions { gap: 10px; }
+  .hero-actions .button { width: 100%; min-height: 52px; padding-inline: 18px; }
+  .hero-points { margin-top: 34px; padding-top: 18px; gap: 6px; }
+  .hero-points li { font-size: 7px; line-height: 1.45; letter-spacing: .03em; }
+  .hero-points b { margin-bottom: 5px; font-size: 8px; }
+  .hero { grid-template-rows: auto 420px 50px; }
+  .hero-visual { min-height: 420px; }
+  .shape-one { width: 360px; height: 360px; right: -142px; top: 34px; border-width: 56px; }
+  .shape-two { width: 190px; height: 190px; left: 12px; bottom: 42px; }
+  .hero-coach-back { width: 59%; left: -1%; max-height: 396px; }
+  .hero-coach-front { width: 65%; right: -4%; max-height: 400px; }
+  .hero-stamp { top: 18px; right: 16px; width: 80px; height: 80px; border-width: 1px; }
+  .hero-stamp strong { font-size: 17px; }
+  .hero-stamp span { font-size: 5px; }
+  .vertical-word { display: none; }
+  .hero-marquee div { font-size: 9px; letter-spacing: .12em; }
+  .hero-marquee i { padding-inline: 15px; }
+}
