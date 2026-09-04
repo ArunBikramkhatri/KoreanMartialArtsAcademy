@@ -25,3 +25,8 @@ if ('IntersectionObserver' in window) {
   sections.forEach((section) => sectionObserver.observe(section));
 }
 document.querySelectorAll('.mobile-menu a').forEach((link) => { link.addEventListener('click', () => link.closest('details').removeAttribute('open')); });
+document.querySelectorAll('.mobile-menu').forEach((menu) => {
+  menu.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') menu.removeAttribute('open');
+  });
+});
