@@ -1,0 +1,22 @@
+{
+  // Photo manager for koreanmartialarts.com.np. Setup steps: worker/SETUP.md
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kmaa-photos",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-01",
+  // Runs in front of the GitHub Pages site on the whole domain.
+  "routes": [
+    { "pattern": "koreanmartialarts.com.np/*", "zone_name": "koreanmartialarts.com.np" }
+  ],
+  // Use the custom domain only; no separate workers.dev address.
+  "workers_dev": false,
+  // Free D1 database for the photos (created with `npx wrangler d1 create kmaa-photos`).
+  "d1_databases": [
+    { "binding": "DB", "database_name": "kmaa-photos", "database_id": "c056c969-0846-44a4-bd3b-ab8a7df58d9b" }
+  ],
+  // Lets src/index.js import admin.html as text.
+  "rules": [
+    { "type": "Text", "globs": ["**/*.html"], "fallthrough": false }
+  ],
+  "observability": { "enabled": true }
+}

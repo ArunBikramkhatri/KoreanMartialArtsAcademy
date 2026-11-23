@@ -1,0 +1,4 @@
+# Copy to .dev.vars for local testing only (never commit .dev.vars).
+ADMIN_PASSWORD=test-password
+# Local static server for the site, e.g. `python3 -m http.server 8000` in the repo root.
+ORIGIN=http://127.0.0.1:8000

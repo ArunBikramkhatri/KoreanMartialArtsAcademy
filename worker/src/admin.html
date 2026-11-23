@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#151718">
+  <title>Website photos · KMAA Nepal</title>
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#151718;--red:#e23b32;--red-dark:#c22a22;--gold:#e8b45f;--cream:#f3eee5;--paper:#fbf9f5;--muted:#5f615f;--line:rgba(21,23,24,.14);--green:#1f8a4c}
+    *{box-sizing:border-box}
+    [hidden]{display:none!important}
+    html{-webkit-text-size-adjust:100%}
+    body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;font-size:17px;line-height:1.5}
+    button,input{font:inherit;color:inherit}
+    button{cursor:pointer}
+    :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .wrap{width:min(100% - 32px,760px);margin:0 auto}
+
+    /* Login */
+    .login{min-height:100vh;display:grid;place-items:center;padding:32px 0}
+    .login-card{width:min(100% - 32px,420px);padding:32px 24px;border-radius:28px;background:#fff;box-shadow:0 20px 60px rgba(21,23,24,.1);text-align:center}
+    .login-card img{width:84px;height:84px;object-fit:contain;border:1px solid var(--line);border-radius:50%;padding:4px}
+    .login-card h1{margin:16px 0 6px;font-size:28px;font-weight:900;letter-spacing:-.03em}
+    .login-card p{margin:0 0 24px;color:var(--muted)}
+    .field{display:block;text-align:left;font-weight:800;margin-bottom:8px}
+    .password-row{position:relative}
+    .password-row input{width:100%;min-height:58px;padding:0 92px 0 18px;border:2px solid var(--line);border-radius:16px;background:var(--paper);font-size:18px}
+    .password-row input:focus{border-color:var(--ink);outline:none}
+    .show-btn{position:absolute;right:6px;top:6px;bottom:6px;padding:0 14px;border:0;border-radius:12px;background:var(--cream);font-weight:800;font-size:15px}
+    .error{margin:12px 0 0;color:var(--red-dark);font-weight:800}
+
+    /* Buttons */
+    .btn{min-height:56px;width:100%;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:16px;font-size:17px;font-weight:900;text-decoration:none;transition:transform .15s,background .15s}
+    .btn:active{transform:scale(.98)}
+    .btn[disabled]{opacity:.55;pointer-events:none}
+    .btn-red{background:var(--red);color:#fff}
+    .btn-red:hover{background:var(--red-dark)}
+    .btn-dark{background:var(--ink);color:#fff}
+    .btn-light{background:var(--cream);color:var(--ink)}
+    .btn-outline{background:#fff;border:2px solid var(--line);color:var(--ink)}
+    .btn-small{min-height:46px;font-size:15px;border-radius:12px;padding:0 12px}
+    .login .btn{margin-top:18px}
+
+    /* Top bar */
+    .topbar{position:sticky;top:0;z-index:10;background:rgba(251,249,245,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+    .topbar .wrap{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .topbar strong{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:900}
+    .topbar img{width:40px;height:40px;object-fit:contain;border:1px solid var(--line);border-radius:50%;background:#fff;padding:2px}
+    .link-btn{border:0;background:none;padding:10px 4px;font-weight:800;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-size:15px}
+
+    main{padding:24px 0 120px}
+    .intro{padding:22px;border-radius:22px;background:var(--ink);color:#fff}
+    .intro h1{margin:0 0 6px;font-size:26px;font-weight:900;letter-spacing:-.03em}
+    .intro p{margin:0 0 16px;color:rgba(255,255,255,.75);font-size:16px}
+    .intro .btn{background:#fff;color:var(--ink)}
+
+    h2{margin:40px 0 4px;font-size:24px;font-weight:900;letter-spacing:-.02em}
+    .section-help{margin:0 0 16px;color:var(--muted);font-size:16px}
+
+    /* Main photo cards */
+    .slots{display:grid;gap:16px}
+    .slot{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:#fff}
+    .slot-image{position:relative;aspect-ratio:4/3;background:linear-gradient(150deg,#f6e7cd,#e8b45f);display:grid;place-items:center;overflow:hidden}
+    .slot-image img{width:100%;height:100%;object-fit:contain;display:block}
+    .slot[data-key="share"] .slot-image img{object-fit:cover}
+    .badge{position:absolute;left:12px;top:12px;padding:6px 10px;border-radius:100px;background:rgba(21,23,24,.85);color:#fff;font-size:13px;font-weight:800}
+    .badge.new{background:var(--green)}
+    .slot-body{padding:18px}
+    .slot-body h3{margin:0;font-size:20px;font-weight:900}
+    .slot-body p{margin:4px 0 14px;color:var(--muted);font-size:15px}
+    .slot-actions{display:grid;gap:10px}
+
+    /* Gallery */
+    .gallery-add{display:grid;gap:10px;margin-bottom:16px}
+    .gallery-count{color:var(--muted);font-size:15px;text-align:center}
+    .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .tile{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff}
+    .tile img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--cream)}
+    .tile-body{padding:10px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .tile-caption{margin:0;font-size:14px;font-weight:700;line-height:1.35;word-break:break-word}
+    .tile-caption.empty{color:var(--muted);font-weight:500;font-style:italic}
+    .tile-actions{margin-top:auto;display:grid;gap:8px}
+    .empty-gallery{padding:28px 20px;border:2px dashed var(--line);border-radius:20px;text-align:center;color:var(--muted)}
+    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}.slots{grid-template-columns:1fr 1fr}.slot-actions{grid-template-columns:1fr}}
+
+    /* Busy overlay on a card while uploading */
+    .busy{position:absolute;inset:0;z-index:2;display:grid;place-content:center;gap:12px;padding:24px;background:rgba(251,249,245,.92);text-align:center;font-weight:900}
+    .bar{width:220px;max-width:100%;height:10px;border-radius:10px;background:var(--cream);overflow:hidden;margin:0 auto}
+    .bar span{display:block;height:100%;width:0;background:var(--red);transition:width .2s}
+
+    /* Gallery upload progress panel */
+    .progress-panel{padding:16px;border-radius:18px;background:#fff;border:1px solid var(--line);margin-bottom:16px;font-weight:800}
+    .progress-panel .bar{width:100%;margin-top:10px}
+
+    /* Toast */
+    .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:50;width:min(100% - 32px,520px);padding:16px 18px;border-radius:16px;background:var(--ink);color:#fff;font-weight:800;box-shadow:0 16px 40px rgba(21,23,24,.3);transform:translate(-50%,140%);transition:transform .25s}
+    .toast.show{transform:translate(-50%,0)}
+    .toast.ok{background:var(--green)}
+    .toast.bad{background:var(--red-dark)}
+
+    .loading{padding:60px 0;text-align:center;color:var(--muted);font-weight:800}
+    .help{margin-top:40px;padding:20px;border-radius:20px;background:var(--cream);font-size:15px}
+    .help h3{margin:0 0 8px;font-size:18px}
+    .help ul{margin:0;padding-left:20px}
+    .help li{margin:6px 0}
+  </style>
+</head>
+<body>
+  <!-- Login -->
+  <section class="login" id="login" hidden>
+    <form class="login-card" id="login-form">
+      <img src="/logo.png" alt="" width="84" height="84">
+      <h1>Website photos</h1>
+      <p>Enter the password to change the photos on koreanmartialarts.com.np</p>
+      <label class="field" for="password">Password</label>
+      <div class="password-row">
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button class="show-btn" type="button" id="show-password">Show</button>
+      </div>
+      <p class="error" id="login-error" role="alert" hidden></p>
+      <button class="btn btn-red" type="submit" id="login-button">Log in</button>
+    </form>
+  </section>
+
+  <!-- Editor -->
+  <div id="app" hidden>
+    <header class="topbar">
+      <div class="wrap">
+        <strong><img src="/logo.png" alt="">Website photos</strong>
+        <button class="link-btn" type="button" id="logout">Log out</button>
+      </div>
+    </header>
+    <main class="wrap">
+      <div class="intro">
+        <h1>Namaste! 🙏</h1>
+        <p>Tap <b>Change photo</b> under any picture and choose a photo from your phone. It appears on the website straight away.</p>
+        <a class="btn" href="/" target="_blank" rel="noopener">See the website ↗</a>
+      </div>
+
+      <h2>Main photos</h2>
+      <p class="section-help">These are always shown on the website.</p>
+      <div class="slots" id="slots"><p class="loading">Loading…</p></div>
+
+      <h2>Gallery</h2>
+      <p class="section-help">Photos of classes, belt tests and events. Newest photos are shown first. The Gallery appears on the website as soon as it has one photo.</p>
+      <div class="gallery-add">
+        <button class="btn btn-red" type="button" id="add-photos">＋ Add photos to gallery</button>
+        <span class="gallery-count" id="gallery-count"></span>
+      </div>
+      <div class="progress-panel" id="gallery-progress" hidden>
+        <span id="gallery-progress-text">Uploading…</span>
+        <div class="bar"><span id="gallery-progress-bar"></span></div>
+      </div>
+      <div class="gallery" id="gallery"></div>
+
+      <div class="help">
+        <h3>Tips</h3>
+        <ul>
+          <li>You can choose several gallery photos at once.</li>
+          <li>Photos are made smaller automatically, so they upload quickly.</li>
+          <li>Coach photos look best when the person is standing in the middle of the photo.</li>
+          <li>Changed a main photo by mistake? Tap <b>Use original photo</b>.</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Hidden file pickers. accept="image/*" lets the phone offer both the camera and the photo gallery. -->
+  <input type="file" accept="image/*" id="slot-file" hidden>
+  <input type="file" accept="image/*" id="gallery-files" multiple hidden>
+
+  <script>
+  'use strict';
+
+  // What each main photo is, where it shows, and how it is prepared before uploading.
+  const SLOTS = [
+    { key: 'coach-taekwondo', title: 'Taekwondo coach', where: 'Raju Shrestha. Top of the page and the Coaches section.', maxW: 1200, maxH: 1600 },
+    { key: 'coach-muaythai', title: 'Muay Thai coach', where: 'Santosh Ghalan. Top of the page and the Coaches section.', maxW: 1200, maxH: 1600 },
+    { key: 'logo', title: 'Logo', where: 'Top corner and bottom of every page.', maxW: 720, maxH: 720, keepPng: true },
+    { key: 'share', title: 'Sharing picture', where: 'Shown when someone shares the website link on Facebook, WhatsApp or Viber.', maxW: 1200, maxH: 630, crop: 1200 / 630 },
+  ];
+
+  const $ = (id) => document.getElementById(id);
+  let state = null;
+  let pendingSlot = null;
+
+  /* ----- Server calls ----- */
+  async function api(path, options = {}) {
+    const response = await fetch('/api/' + path, { credentials: 'same-origin', ...options });
+    const data = await response.json().catch(() => ({}));
+    if (response.status === 401 && path !== 'login') { showLogin(); throw new Error('Please log in again.'); }
+    if (!response.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+    return data;
+  }
+
+  // XMLHttpRequest instead of fetch, because it reports upload progress for the progress bar.
+  function upload(method, path, body, headers, onProgress) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open(method, '/api/' + path);
+      Object.entries(headers || {}).forEach(([name, value]) => xhr.setRequestHeader(name, value));
+      xhr.upload.onprogress = (event) => { if (event.lengthComputable && onProgress) onProgress(event.loaded / event.total); };
+      xhr.onload = () => {
+        let data = {};
+        try { data = JSON.parse(xhr.responseText); } catch (e) {}
+        if (xhr.status === 401) { showLogin(); reject(new Error('Please log in again.')); }
+        else if (xhr.status >= 200 && xhr.status < 300) resolve(data);
+        else reject(new Error(data.error || 'Upload failed. Please try again.'));
+      };
+      xhr.onerror = () => reject(new Error('No internet connection. Please check your connection and try again.'));
+      xhr.send(body);
+    });
+  }
+
+  /* ----- Photo preparation: resize on the phone so uploads are small and fast ----- */
+  async function decode(file) {
+    if ('createImageBitmap' in window) {
+      try { return await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch (e) {}
+    }
+    const url = URL.createObjectURL(file);
+    try {
+      const img = new Image();
+      img.src = url;
+      await img.decode();
+      return img;
+    } catch (e) {
+      throw new Error('This photo could not be opened. Please choose a different photo.');
+    } finally {
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+  }
+
+  async function prepare(source, { maxW, maxH, crop, png, quality = 0.85 }) {
+    let sx = 0, sy = 0, sw = source.width, sh = source.height;
+    if (crop) {
+      if (sw / sh > crop) { const w = sh * crop; sx = (sw - w) / 2; sw = w; }
+      else { const h = sw / crop; sy = (sh - h) / 2; sh = h; }
+    }
+    const scale = Math.min(1, maxW / sw, maxH / sh);
+    const width = Math.max(1, Math.round(sw * scale));
+    const height = Math.max(1, Math.round(sh * scale));
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    if (!png) { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, width, height); }
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(source, sx, sy, sw, sh, 0, 0, width, height);
+    const type = png ? 'image/png' : 'image/jpeg';
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, type, quality));
+    if (!blob) throw new Error('This photo could not be prepared. Please try a different photo.');
+    return { blob, width, height };
+  }
+
+  // The website stores up to about 1.9 MB per photo. Almost every photo is far smaller after
+  // resizing; for the rare one that is not, try again smaller (and as JPEG) until it fits.
+  const MAX_BYTES = 1800000;
+  async function prepareToFit(source, options) {
+    let attempt = { ...options };
+    for (let i = 0; i < 5; i++) {
+      const result = await prepare(source, attempt);
+      if (result.blob.size <= MAX_BYTES) return result;
+      attempt = { ...attempt, png: false, quality: Math.max(0.6, (attempt.quality || 0.85) - 0.08), maxW: Math.round(attempt.maxW * 0.85), maxH: Math.round(attempt.maxH * 0.85) };
+    }
+    throw new Error('This photo is too large. Please choose a different photo.');
+  }
+
+  /* ----- Screens ----- */
+  function showLogin() {
+    $('app').hidden = true;
+    $('login').hidden = false;
+    setTimeout(() => $('password').focus(), 50);
+  }
+
+  async function showApp() {
+    $('login').hidden = true;
+    $('app').hidden = false;
+    render(await api('state'));
+  }
+
+  function render(next) {
+    state = next;
+    renderSlots();
+    renderGallery();
+  }
+
+  function renderSlots() {
+    const list = $('slots');
+    list.replaceChildren(...SLOTS.map((slot) => {
+      const info = state.slots[slot.key];
+      const card = el('article', { className: 'slot', dataset: { key: slot.key } });
+      const image = el('div', { className: 'slot-image' });
+      image.append(el('img', { src: info.url, alt: slot.title }));
+      image.append(el('span', { className: 'badge' + (info.custom ? ' new' : ''), textContent: info.custom ? 'Your photo' : 'Original photo' }));
+      const body = el('div', { className: 'slot-body' });
+      body.append(el('h3', { textContent: slot.title }), el('p', { textContent: slot.where }));
+      const actions = el('div', { className: 'slot-actions' });
+      const change = el('button', { className: 'btn btn-dark', type: 'button', textContent: '📷 Change photo' });
+      change.addEventListener('click', () => { pendingSlot = slot; $('slot-file').value = ''; $('slot-file').click(); });
+      actions.append(change);
+      if (info.custom) {
+        const restore = el('button', { className: 'btn btn-outline btn-small', type: 'button', textContent: 'Use original photo' });
+        restore.addEventListener('click', () => restoreSlot(slot));
+        actions.append(restore);
+      }
+      body.append(actions);
+      card.append(image, body);
+      return card;
+    }));
+  }
+
+  function renderGallery() {
+    const grid = $('gallery');
+    const items = state.gallery;
+    $('gallery-count').textContent = items.length
+      ? `${items.length} photo${items.length === 1 ? '' : 's'} in the gallery`
+      : '';
+    if (!items.length) {
+      grid.replaceChildren(el('p', { className: 'empty-gallery', textContent: 'No gallery photos yet. Tap “Add photos to gallery” to add your first ones.' }));
+      grid.style.display = 'block';
+      return;
+    }
+    grid.style.display = '';
+    grid.replaceChildren(...items.map((item) => {
+      const tile = el('article', { className: 'tile' });
+      tile.append(el('img', { src: item.thumb, alt: item.caption || 'Gallery photo', loading: 'lazy' }));
+      const body = el('div', { className: 'tile-body' });
+      body.append(el('p', { className: 'tile-caption' + (item.caption ? '' : ' empty'), textContent: item.caption || 'No caption' }));
+      const actions = el('div', { className: 'tile-actions' });
+      const caption = el('button', { className: 'btn btn-light btn-small', type: 'button', textContent: item.caption ? '✏️ Edit caption' : '✏️ Add caption' });
+      caption.addEventListener('click', () => editCaption(item));
+      const remove = el('button', { className: 'btn btn-outline btn-small', type: 'button', textContent: '🗑 Delete' });
+      remove.addEventListener('click', () => deletePhoto(item));
+      actions.append(caption, remove);
+      body.append(actions);
+      tile.append(body);
+      return tile;
+    }));
+  }
+
+  /* ----- Actions ----- */
+  $('slot-file').addEventListener('change', async (event) => {
+    const file = event.target.files[0];
+    const slot = pendingSlot;
+    if (!file || !slot) return;
+    const card = document.querySelector(`.slot[data-key="${slot.key}"]`);
+    const overlay = busyOverlay(card, 'Preparing photo…');
+    try {
+      const source = await decode(file);
+      const png = slot.keepPng && file.type === 'image/png';
+      const { blob, width, height } = await prepareToFit(source, { ...slot, png });
+      overlay.text.textContent = 'Uploading…';
+      const next = await upload('PUT', 'slots/' + slot.key, blob,
+        { 'Content-Type': blob.type, 'X-Image-Width': width, 'X-Image-Height': height },
+        (part) => { overlay.bar.style.width = Math.round(part * 100) + '%'; });
+      render(next);
+      toast(`✅ Saved! The new ${slot.title.toLowerCase()} photo is on the website.`, 'ok');
+    } catch (error) {
+      overlay.remove();
+      toast(error.message, 'bad');
+    }
+  });
+
+  async function restoreSlot(slot) {
+    if (!confirm(`Go back to the original ${slot.title.toLowerCase()} photo?`)) return;
+    try {
+      render(await api('slots/' + slot.key, { method: 'DELETE' }));
+      toast('✅ The original photo is back on the website.', 'ok');
+    } catch (error) { toast(error.message, 'bad'); }
+  }
+
+  $('add-photos').addEventListener('click', () => { $('gallery-files').value = ''; $('gallery-files').click(); });
+
+  $('gallery-files').addEventListener('change', async (event) => {
+    const files = [...event.target.files];
+    if (!files.length) return;
+    const room = state.galleryLimit - state.gallery.length;
+    if (room <= 0) { toast('The gallery is full. Delete some old photos first.', 'bad'); return; }
+    const chosen = files.slice(0, room);
+
+    // One caption for this batch is optional; most people skip it.
+    const caption = chosen.length === 1
+      ? prompt('Write a short caption for this photo (optional). Example: Belt test, November 2026', '')
+      : prompt(`Write a caption for these ${chosen.length} photos (optional). You can leave it empty.`, '');
+    if (caption === null) return; // tapped Cancel
+
+    const panel = $('gallery-progress');
+    const text = $('gallery-progress-text');
+    const bar = $('gallery-progress-bar');
+    $('add-photos').disabled = true;
+    panel.hidden = false;
+    let done = 0;
+    let failed = 0;
+    for (const file of chosen) {
+      text.textContent = `Uploading photo ${done + failed + 1} of ${chosen.length}…`;
+      bar.style.width = '0%';
+      try {
+        const source = await decode(file);
+        const full = await prepareToFit(source, { maxW: 1600, maxH: 1600, quality: 0.82 });
+        const thumb = await prepareToFit(source, { maxW: 640, maxH: 640, quality: 0.78 });
+        const form = new FormData();
+        form.append('full', full.blob, 'full.jpg');
+        form.append('thumb', thumb.blob, 'thumb.jpg');
+        form.append('tw', thumb.width);
+        form.append('th', thumb.height);
+        form.append('caption', caption.trim());
+        render(await upload('POST', 'gallery', form, {}, (part) => { bar.style.width = Math.round(part * 100) + '%'; }));
+        done++;
+      } catch (error) {
+        failed++;
+        console.error(error);
+        if (error.message === 'Please log in again.') break;
+      }
+    }
+    panel.hidden = true;
+    $('add-photos').disabled = false;
+    const skipped = files.length - chosen.length;
+    if (failed) toast(`${done} added, ${failed} could not be uploaded. Please try those again.`, 'bad');
+    else toast(`✅ ${done} photo${done === 1 ? '' : 's'} added to the gallery.${skipped ? ` ${skipped} skipped because the gallery is full.` : ''}`, 'ok');
+  });
+
+  async function editCaption(item) {
+    const caption = prompt('Caption for this photo (leave empty for no caption):', item.caption || '');
+    if (caption === null) return;
+    try {
+      render(await api('gallery/' + item.id, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ caption }),
+      }));
+      toast('✅ Caption saved.', 'ok');
+    } catch (error) { toast(error.message, 'bad'); }
+  }
+
+  async function deletePhoto(item) {
+    if (!confirm('Delete this photo from the gallery?')) return;
+    try {
+      render(await api('gallery/' + item.id, { method: 'DELETE' }));
+      toast('Photo deleted.', 'ok');
+    } catch (error) { toast(error.message, 'bad'); }
+  }
+
+  /* ----- Login and logout ----- */
+  $('show-password').addEventListener('click', () => {
+    const input = $('password');
+    const hidden = input.type === 'password';
+    input.type = hidden ? 'text' : 'password';
+    $('show-password').textContent = hidden ? 'Hide' : 'Show';
+  });
+
+  $('login-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = $('login-button');
+    const error = $('login-error');
+    error.hidden = true;
+    button.disabled = true;
+    button.textContent = 'Checking…';
+    try {
+      await api('login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('password').value }) });
+      $('password').value = '';
+      await showApp();
+    } catch (e) {
+      error.textContent = e.message;
+      error.hidden = false;
+    } finally {
+      button.disabled = false;
+      button.textContent = 'Log in';
+    }
+  });
+
+  $('logout').addEventListener('click', async () => {
+    await api('logout', { method: 'POST' }).catch(() => {});
+    showLogin();
+  });
+
+  /* ----- Small helpers ----- */
+  function el(tag, props) {
+    const node = document.createElement(tag);
+    const { dataset, ...rest } = props || {};
+    Object.assign(node, rest);
+    Object.assign(node.dataset, dataset || {});
+    return node;
+  }
+
+  function busyOverlay(card, message) {
+    const overlay = el('div', { className: 'busy' });
+    const text = el('span', { textContent: message });
+    const track = el('div', { className: 'bar' });
+    const bar = el('span');
+    track.append(bar);
+    overlay.append(text, track);
+    card.append(overlay);
+    return { text, bar, remove: () => overlay.remove() };
+  }
+
+  let toastTimer;
+  function toast(message, kind) {
+    const node = $('toast');
+    node.textContent = message;
+    node.className = 'toast show ' + (kind || '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { node.className = 'toast'; }, 4500);
+  }
+
+  // Start: if the phone is already logged in, go straight to the photos.
+  api('state').then((data) => { $('login').hidden = true; $('app').hidden = false; render(data); }).catch(() => showLogin());
+  </script>
+</body>
+</html>
