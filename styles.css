@@ -164,3 +164,38 @@ footer{min-height:120px;padding:0 max(24px,calc((100vw - 1320px)/2));display:gri
 .contact-details .social-links a { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.28); border-radius: 50%; color: #fff; transition: background .2s, color .2s, border-color .2s; }
 .contact-details .social-links a:hover, .contact-details .social-links a:focus-visible { border-color: var(--gold); background: var(--gold); color: var(--ink); }
 .contact-details .social-links svg { width: 22px; height: 22px; fill: currentColor; }
+
+/* Phones: readable small print, comfortable tap targets and a quick Call / Directions bar. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+.mobile-actions { display: none; }
+@media (max-width: 720px) {
+  .eyebrow, .program-coach, .program-card > a, .coach-copy > p, .contact-details span, .principle-list article > span { font-size: 10px; }
+  .hero-points li { font-size: 10px; line-height: 1.4; }
+  .hero-points b { font-size: 10px; }
+  .program-number { font-size: 10px; }
+  .schedule-card-top p { font-size: 10px; line-height: 1.5; }
+  .time-row span { font-size: 11px; }
+  .time-row small { font-size: 12px; }
+  .time-slots b { font-size: 10px; }
+  .coach-photo span { font-size: 10px; }
+  .coach-copy li { padding: 8px 11px; font-size: 10px; }
+  .hero-marquee div { font-size: 11px; }
+  .mobile-menu summary { font-size: 11px; }
+  .mobile-menu nav a { font-size: 12px; }
+  footer > p { font-size: 10px; }
+  .contact-details p, .contact-details a, .contact-details address { font-size: 15px; }
+  .contact-details a:not(.contact-phone) { display: inline-block; padding: 6px 0; }
+  .contact-details .contact-phone { display: inline-block; padding: 4px 0; }
+
+  .mobile-actions { position: fixed; z-index: 90; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px; border-radius: 22px; background: rgba(21,23,24,.94); box-shadow: 0 14px 40px rgba(21,23,24,.3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 0; visibility: hidden; transform: translateY(calc(100% + 24px)); transition: transform .3s ease, opacity .3s ease, visibility .3s; }
+  .mobile-actions.is-visible { opacity: 1; visibility: visible; transform: none; }
+  .mobile-actions a { min-height: 50px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 15px; font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+  .mobile-action-call { background: var(--red); color: #fff; }
+  .mobile-action-map { background: rgba(255,255,255,.1); color: #fff; }
+  .mobile-actions a:focus-visible { outline-offset: 2px; }
+  footer { padding-bottom: 100px; }
+}
+@media (max-width: 480px) {
+  footer { padding-bottom: 100px; }
+}
+@media print { .mobile-actions { display: none !important; } }

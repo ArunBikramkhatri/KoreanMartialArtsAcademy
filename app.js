@@ -7,6 +7,19 @@ function updateScrollEffects() {
   const scrollable = document.documentElement.scrollHeight - window.innerHeight;
   progressBar.style.transform = `scaleX(${scrollable > 0 ? scrollTop / scrollable : 0})`;
   header.classList.toggle('is-scrolled', scrollTop > 24);
+  updateMobileActions();
+}
+// Phones: a Call / Directions bar appears once the visitor scrolls past the hero,
+// and steps aside while the Contact section (which has the same buttons) is on screen.
+const mobileActions = document.querySelector('.mobile-actions');
+const contactSection = document.querySelector('#contact');
+let contactInView = false;
+function updateMobileActions() {
+  if (!mobileActions) return;
+  mobileActions.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.7 && !contactInView);
+}
+if (mobileActions && contactSection && 'IntersectionObserver' in window) {
+  new IntersectionObserver(([entry]) => { contactInView = entry.isIntersecting; updateMobileActions(); }).observe(contactSection);
 }
 window.addEventListener('scroll', updateScrollEffects, { passive: true });
 updateScrollEffects();
